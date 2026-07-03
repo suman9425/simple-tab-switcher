@@ -101,24 +101,24 @@
       js: "JavaScript adds interactivity, logic, and dynamic behaviors to make the website come alive."
     };
 
-    //  Grab the DOM elements we need to interact with
+    //  Grabbing the DOM elements
     const tabs = document.querySelectorAll('.tab-link');
     const displayText = document.getElementById('display-text');
 
-    // click event listener
+    // clicking event listener
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         
-        // Remove the 'active' class from whichever tab currently has it
+        // Removing the 'active' class from whichever
         document.querySelector('.tab-link.active').classList.remove('active');
         
-        // Add the 'active' class to the tab that was just clicked
+        // Adding the 'active' class to the tab
         tab.classList.add('active');
         
-        // Get the specific key (html, css, or js) from the custom data attribute
+        // Getting the specific key (html, css, or js) from the custom data attribute
         const selectedTab = tab.getAttribute('data-tab');
         
-        // Update the inner text of the box using our content object
+        // Updating the inner text of the box using our content object
         displayText.textContent = tabContents[selectedTab];
       });
     });

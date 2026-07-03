@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Tab Switcher</title>
+  <style>
+    /* Basic reset to clear default browser margins */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+    }
+
+    /* Outer container matching your blue layout */
+    .outer-container {
+      width: 600px;
+      height: 400px;
+      background-color: #a3daff; /* Light blue */
+      /* border: 2px solid #ff4d4d; Red outer border */
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Tab navigation style */
+    .tab-menu {
+      margin-bottom: 15px;
+      font-size: 18px;
+      color: #090000; /* Red text for links */
+    }
+
+    .tab-link {
+      cursor: pointer;
+      padding: 0 10px;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    .tab-link:hover {
+      opacity: 0.7;
+    }
+
+    .tab-link.active {
+      text-decoration: underline;
+    }
+
+    /* Inner text box matching your yellow layout */
+    .content-box {
+      width: 90%;
+      height: 70%;
+      background-color: #bfc35e; 
+      border: 2px solid #8a2be2; 
+      border-radius: 0.5rem;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Content text color */
+    #display-text {
+      color: #0a0a0a; 
+      font-size: 18px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="outer-container">
+    <div class="tab-menu">
+      <span class="tab-link active" data-tab="html">html</span> |
+      <span class="tab-link" data-tab="css">CSS</span> |
+      <span class="tab-link" data-tab="js">JavaScript</span>
+    </div>
+
+    <div class="content-box">
+      <p id="display-text">HTML (HyperText Markup Language) is the standard skeleton structure used to create web pages.</p>
+    </div>
+  </div>
+
+  <script>
+    //  Storing the text content for each tab in a simple object
+    const tabContents = {
+      html: "HTML (HyperText Markup Language) is the standard skeleton structure used to create web pages.",
+      css: "CSS (Cascading Style Sheets) handles the design, colors, layouts, and overall look of the webpage.",
+      js: "JavaScript adds interactivity, logic, and dynamic behaviors to make the website come alive."
+    };
+
+    //  Grab the DOM elements we need to interact with
+    const tabs = document.querySelectorAll('.tab-link');
+    const displayText = document.getElementById('display-text');
+
+    // click event listener
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        
+        // Remove the 'active' class from whichever tab currently has it
+        document.querySelector('.tab-link.active').classList.remove('active');
+        
+        // Add the 'active' class to the tab that was just clicked
+        tab.classList.add('active');
+        
+        // Get the specific key (html, css, or js) from the custom data attribute
+        const selectedTab = tab.getAttribute('data-tab');
+        
+        // Update the inner text of the box using our content object
+        displayText.textContent = tabContents[selectedTab];
+      });
+    });
+  </script>
+
+</body>
+</html>
